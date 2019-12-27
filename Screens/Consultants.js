@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, View, Text, StyleSheet, SafeAreaView, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 const themeColor = 'maroon';
 
 const DATA = [
@@ -35,21 +36,33 @@ const DATA = [
     },
   ];
 
-
 class Consultants extends React.Component {
+    static navigationOptions = {
+        drawerLabel: 'Consultants',
+        drawerIcon: ({ tintColor }) => (
+          <Ionicons name='ios-briefcase' size={30}/>
+        ),
+      };
     render(){
         return(
-            <View style={styles.bigContainer}>
-                <Text style={styles.bigTitle}>Re-Entry Consultants</Text>
-                <SafeAreaView style={styles.container}>
-                    <FlatList
-                        data={DATA}
-                        renderItem={({ item }) => <ConsultantComp imageUrl={item.imageUrl} name={item.name} description={item.description}/>}
-                        keyExtractor={item => item.id}
-                    />
-                </SafeAreaView>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                <Ionicons name='ios-menu' size={40}
+                style={styles.icon}
+                onPress={() => this.props.navigation.toggleDrawer()} />
+                </View>
+                <View style={styles.bigContainer}>
+                    <Text style={styles.bigTitle}>Re-Entry Consultants</Text>
+                    <SafeAreaView style={styles.container}>
+                        <FlatList
+                            data={DATA}
+                            renderItem={({ item }) => <ConsultantComp imageUrl={item.imageUrl} name={item.name} description={item.description}/>}
+                            keyExtractor={item => item.id}
+                        />
+                    </SafeAreaView>
+                </View>
             </View>
-            );
+        );
     }
 }
 
@@ -87,7 +100,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch'
       },
-      item: {
+    header: {
+        alignSelf: 'stretch',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-end',
+        backgroundColor: themeColor,
+        height: 90
+    },
+    icon: {
+        paddingLeft: 20,
+        color: 'white'
+    },
+    item: {
         backgroundColor: 'gray',
         marginVertical: 8,
         marginHorizontal: 8,
@@ -95,16 +119,16 @@ const styles = StyleSheet.create({
         paddingBottom: 50,
         paddingLeft: 20,
         flexDirection: 'row'
-      },
-      previewText: {
-          padding: 10,
-      },
-      smallTitle: {
-          fontSize: 16
-      },
-      title: {
-        fontSize: 32
-      },
+    },
+    previewText: {
+        padding: 10,
+    },
+    smallTitle: {
+        fontSize: 16
+    },
+    title: {
+    fontSize: 32
+    },
 })
 
 export default Consultants;

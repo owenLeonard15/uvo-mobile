@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
-import { StyleSheet, StatusBar, View, Text } from 'react-native';
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer'
-import { Ionicons } from '@expo/vector-icons';
+import AboutUs from './Screens/AboutUs';
 import Events from './Screens/Events';
 import Resources from './Screens/Resources';
 import Consultants from './Screens/Consultants';
@@ -10,153 +9,31 @@ import Profile from './Screens/Profile';
 
 const themeColor = 'maroon'
 
-/*
-Screens:
-  Events
-  Resources
-  Consultants
-  Profile
-  About Us
-*/
-
-
-class EventsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Events',
-    drawerLabel: 'Events',
-    drawerIcon: () => (
-      <Ionicons  name='ios-calendar' size={32}
-      />
-    )
-  };
-  render() {
-    return (
-      <Fragment>
-      <StatusBar
-        backgroundColor="#fff"
-        barStyle="light-content" // Here is where you change the font-color
-      />
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Ionicons name='ios-menu' size={40}
-          style={styles.icon}
-          onPress={() => this.props.navigation.toggleDrawer()} />
-        </View>
-        <Events />
-      </View>
-      </Fragment>
-    );
-  }
-}
-
-class ResourcesScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Resources',
-    drawerIcon: () => (
-      <Ionicons name='ios-clipboard' size={30}
-      />
-    ),
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Ionicons name='ios-menu' size={40}
-          style={styles.icon}
-          onPress={() => this.props.navigation.toggleDrawer()} />
-        </View>
-        <Resources />
-      </View>
-    );
-  }
-}
-
-class ConsultantsScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Consultants',
-    drawerIcon: ({ tintColor }) => (
-      <Ionicons name='ios-briefcase' size={30}
-      />
-    ),
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Ionicons name='ios-menu' size={40}
-          style={styles.icon}
-          onPress={() => this.props.navigation.toggleDrawer()} />
-        </View>
-        <Consultants />
-      </View>
-    );
-  }
-}
-
-class ProfileScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Profile',
-    drawerIcon: ({ tintColor }) => (
-      <Ionicons name='ios-contact' size={30}
-      />
-    ),
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Ionicons name='ios-menu' size={40}
-          style={styles.icon}
-          onPress={() => this.props.navigation.toggleDrawer()} />
-        </View>
-        <Profile />
-      </View>
-    );
-  }
-}
-
-class AboutUsScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'About Us',
-    drawerIcon: ({ tintColor }) => (
-      <Ionicons name='ios-information-circle-outline' size={30}
-      />
-    ),
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Ionicons name='ios-menu' size={40}
-          style={styles.icon}
-          onPress={() => this.props.navigation.toggleDrawer()} />
-        </View>
-        <Text>About Us Screen</Text>
-      </View>
-    );
-  }
-}
-
+// This object lists all of the screens and references to their class objects
+//
+// For example, the Events navigation object has property screen which has value Events
+// In this case, the value Events is a reference to the imported Events class object form './Screens/Events.js'
 const MyDrawerNavigator = createDrawerNavigator(
   {
     Events: {
-      screen: EventsScreen,
+      screen: Events,
     },
     Resources: {
-      screen: ResourcesScreen,
+      screen: Resources,
     },
     Consultants: {
-      screen: ConsultantsScreen,
+      screen: Consultants,
     },
     Profile: {
-      screen: ProfileScreen
+      screen: Profile,
     },
     AboutUs: {
-      screen: AboutUsScreen
+      screen: AboutUs,
     }
   },
   {
-    //this is marron at a lighter opacity
+    // this is maroon at a lighter opacity
+    // creates a semi-transparent overlay when the drawer is toggled
     overlayColor: 'rgba(128,0,0,.7)',
     hideStatusBar: true,
     contentOptions: {
@@ -164,25 +41,6 @@ const MyDrawerNavigator = createDrawerNavigator(
     }
   }
 );
-
-const styles = StyleSheet.create({
-  container: { 
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start'
-    },
-  header: {
-    alignSelf: 'stretch',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
-    backgroundColor: themeColor,
-    height: 90
-  },
-  icon: {
-    paddingLeft: 20,
-    color: 'white'
-  }
-});
 
 const AppContainer = createAppContainer(MyDrawerNavigator);
 

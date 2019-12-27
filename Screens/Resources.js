@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, FlatList } from 'react-native';
-
+import { Ionicons } from '@expo/vector-icons';
 const themeColor = 'maroon';
 
 const DATA = [
@@ -33,8 +33,22 @@ const DATA = [
 
 
 class Resources extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Resources',
+    drawerIcon: () => (
+      <Ionicons name='ios-clipboard' size={30}
+      />
+    ),
+  };
+
     render(){
         return(
+          <Fragment>
+            <View style={styles.header}>
+              <Ionicons name='ios-menu' size={40}
+              style={styles.icon}
+              onPress={() => this.props.navigation.toggleDrawer()} />
+            </View>
             <View style={styles.bigContainer}>
                 <Text style={styles.bigTitle}>Resources</Text>
                 <SafeAreaView style={styles.container}>
@@ -45,7 +59,8 @@ class Resources extends React.Component {
                     />
                 </SafeAreaView>
             </View>
-            );
+          </Fragment>
+        );
     }
 }
 
@@ -73,22 +88,33 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white'
     },
-    container: {
-        flex: 1,
-        alignSelf: 'stretch'
+    container: { 
+      flex: 1,
+      alignSelf: 'stretch'
       },
-      item: {
-        backgroundColor: 'gray',
-        padding: 50,
-        marginVertical: 8,
-        marginHorizontal: 8,
-      },
-      smallTitle: {
-          fontSize: 16
-      },
-      title: {
-        fontSize: 32
-      },
+    header: {
+      alignSelf: 'stretch',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-end',
+      backgroundColor: themeColor,
+      height: 90
+    },
+    icon: {
+      paddingLeft: 20,
+      color: 'white'
+    },
+    item: {
+      backgroundColor: 'gray',
+      padding: 50,
+      marginVertical: 8,
+      marginHorizontal: 8,
+    },
+    smallTitle: {
+        fontSize: 16
+    },
+    title: {
+      fontSize: 32
+    },
 })
 
 export default Resources;

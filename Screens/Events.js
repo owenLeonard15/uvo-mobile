@@ -1,5 +1,7 @@
-import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, FlatList } from 'react-native';
+import React, {Fragment} from 'react';
+import { View, Text, StyleSheet, StatusBar, SafeAreaView, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
 
 const themeColor = 'maroon';
 
@@ -33,9 +35,34 @@ const DATA = [
 
 
 class Events extends React.Component {
+  static navigationOptions = {
+    title: 'Events',
+    drawerLabel: 'Events',
+    drawerIcon: () => (
+      <Ionicons  name='ios-calendar' size={32}
+      />
+    )
+  };
+
     render(){
         return(
-            <View style={styles.bigContainer}>
+          <Fragment>
+
+            <StatusBar
+              backgroundColor="#fff"
+              barStyle="light-content" // Here is where you change the font-color
+            />
+
+            <View style={styles.container}>
+
+              <View style={styles.header}>
+                <Ionicons name='ios-menu' size={40}
+                style={styles.icon}
+                onPress={() => this.props.navigation.toggleDrawer()} />
+              </View>
+
+              {/* <Events /> */}
+              <View style={styles.bigContainer}>
                 <Text style={styles.bigTitle}>Events</Text>
                 <SafeAreaView style={styles.container}>
                     <FlatList
@@ -44,8 +71,12 @@ class Events extends React.Component {
                         keyExtractor={item => item.id}
                     />
                 </SafeAreaView>
+              </View>
+
             </View>
-            );
+
+          </Fragment>
+        );
     }
 }
 
@@ -77,18 +108,29 @@ const styles = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch'
       },
-      item: {
-        backgroundColor: 'gray',
-        padding: 50,
-        marginVertical: 8,
-        marginHorizontal: 8,
-      },
-      smallTitle: {
-          fontSize: 16
-      },
-      title: {
-        fontSize: 32
-      },
+    header: {
+      alignSelf: 'stretch',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-end',
+      backgroundColor: themeColor,
+      height: 90
+    },
+    icon: {
+      paddingLeft: 20,
+      color: 'white'
+    },
+    item: {
+      backgroundColor: 'gray',
+      padding: 50,
+      marginVertical: 8,
+      marginHorizontal: 8,
+    },
+    smallTitle: {
+        fontSize: 16
+    },
+    title: {
+      fontSize: 32
+    },
 })
 
 export default Events;
