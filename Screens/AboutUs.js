@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-
 class AboutUs extends React.Component {
     static navigationOptions = {
       drawerLabel: 'About Us',
@@ -25,6 +24,7 @@ class AboutUs extends React.Component {
       );
     }
   }
+  
 
   const styles = StyleSheet.create({
     container: { 

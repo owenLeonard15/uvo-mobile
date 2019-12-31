@@ -1,6 +1,9 @@
 import React, {Fragment} from 'react';
-import { View, Text, StyleSheet, StatusBar, SafeAreaView, FlatList } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { increment } from '../actions/testAction';
 
 
 const themeColor = 'maroon';
@@ -47,7 +50,6 @@ class Events extends React.Component {
     render(){
         return(
           <Fragment>
-
             <StatusBar
               backgroundColor="#fff"
               barStyle="light-content" // Here is where you change the font-color
@@ -62,6 +64,9 @@ class Events extends React.Component {
               </View>
 
               {/* <Events /> */}
+              <TouchableOpacity onPress={() => this.props.increment()}>
+                <Text>count: {this.props.testR.count}</Text>
+              </TouchableOpacity>
               <View style={styles.bigContainer}>
                 <Text style={styles.bigTitle}>Events</Text>
                 <SafeAreaView style={styles.container}>
@@ -74,7 +79,6 @@ class Events extends React.Component {
               </View>
 
             </View>
-
           </Fragment>
         );
     }
@@ -89,6 +93,18 @@ class Events extends React.Component {
             
     );
 }
+
+const mapStateToProps = (state) => {
+  const { testR } = state
+  return { testR }
+};
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    increment,
+  }, dispatch)
+);
+
 
 const styles = StyleSheet.create({
     bigContainer: {
@@ -133,4 +149,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Events;
+export default connect(mapStateToProps, mapDispatchToProps)(Events);

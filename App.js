@@ -6,8 +6,13 @@ import Events from './Screens/Events';
 import Resources from './Screens/Resources';
 import Consultants from './Screens/Consultants';
 import Profile from './Screens/Profile';
+const themeColor = 'maroon';
+// Redux
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import testReducer from './reducers/testReducer';
 
-const themeColor = 'maroon'
+const store = createStore(testReducer);
 
 // This object lists all of the screens and references to their class objects
 //
@@ -46,8 +51,10 @@ const AppContainer = createAppContainer(MyDrawerNavigator);
 
 class App extends React.Component {
   render(){
-    return (   
+    return (
+      <Provider store={store}>
         <AppContainer />
+      </Provider>   
     );
   }
 }
