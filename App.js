@@ -10,7 +10,7 @@ const themeColor = 'maroon';
 // Redux
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import testReducer from './reducers/testReducer';
+import testReducer from './redux/reducers/testReducer';
 
 const store = createStore(testReducer);
 
